@@ -27,6 +27,7 @@ program
   });
 
 program.parse(process.argv);
+
 if (program.title && program.id) {
   let db = JSON.parse(fs.readFileSync(filePath, "utf8"));
   db[+program.id - 1].title = program.title;
@@ -34,10 +35,12 @@ if (program.title && program.id) {
   fs.writeFileSync(filePath, JSON.stringify(db, null, 2), "utf8");
   console.log("Note was edited successfully");
 }
+
 if (program.title && !program.id) {
   let db = JSON.parse(fs.readFileSync(filePath, "utf8"));
   db.push({ id: db.length + 1, title: program.title });
   //Save data into file
   fs.writeFileSync(filePath, JSON.stringify(db, null, 2), "utf8");
   console.log("Note Added");
+  console.log(program.title);
 }
